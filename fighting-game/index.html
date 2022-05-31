@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <title>Fighting Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- red container div -->
+    <div class="redConD">
+      <!-- small red container div -->
+      <div class="smlRConD">
+        <!-- player health -->
+        <div class="ContainerP">
+          <div class="PH"></div>
+          <div id="playerHealth" class="keepCenteredP"></div>
+        </div>
+
+        <!-- timer -->
+        <div id="timer" class="T"></div>
+
+        <!-- enemy health -->
+        <div class="ContainerE">
+          <div class="EH"></div>
+          <div id="enemyHealth" class="keepCenteredE"></div>
+        </div>
+      </div>
+      <div id="displayText" class="tie">Tie</div>
+      <canvas></canvas>
+    </div>
+    <script src="js/utils.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

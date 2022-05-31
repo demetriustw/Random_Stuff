@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+  font-family: "Press Start 2P", cursive;
+}
+
+/* red container */
+.redConD {
+  position: relative;
+  display: inline-block;
+}
+
+/* small red container */
+.smlRConD {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Tie Text */
+.tie {
+  position: absolute;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+/* .redConD::after {
+  position: absolute;
+  content: "Press Esc To Start";
+  color: white;
+  background-color: rgba(211, 211, 211, 0.849);
+  font-size: 40px;
+  top: 260px;
+  right: 370px;
+  visibility: visible;
+} */
+
+/**************************/
+/* PLAYER HEALTH BAR */
+/**************************/
+
+.ContainerP {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 4px solid white;
+  border-left: 4px solid white;
+  border-bottom: 4px solid white;
+}
+
+/* Player Health */
+.PH {
+  background-color: red;
+  height: 30px;
+  width: 100%;
+}
+
+.keepCenteredP {
+  position: absolute;
+  background: #818cf8;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/**************************/
+/* TIMER */
+/**************************/
+
+.T {
+  background-color: black;
+  width: 100px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: white;
+  border: 4px solid white;
+}
+
+/**************************/
+/* ENEMY HEALTH BAR */
+/**************************/
+
+.ContainerE {
+  position: relative;
+  width: 100%;
+  border-top: 4px solid white;
+  border-right: 4px solid white;
+  border-bottom: 4px solid white;
+}
+
+/* Enemy Health */
+.EH {
+  background-color: red;
+  height: 30px;
+}
+
+.keepCenteredE {
+  position: absolute;
+  background: #818cf8;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
