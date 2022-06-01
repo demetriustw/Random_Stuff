@@ -22,29 +22,30 @@ Large: 1.8
 0.75px
 
 
-- Primary: #e62222
+- Primary: #fe0c0c
 - Tints:
-#fde9e9
-#fad3d3
-#eb4e4e
+#190101
+#330202
+#cb0a0a
 
 - Shades: 
-#cf1f1f
+#fe2424
 #4c0a0a
 
 
 - Accents:
 - Greys
 
-#888
+#ddd
 #767676 (lightest grey allowed on #fff)
-#6f6f6f (lightest grey allowed on #fde9e9)
+#6f6f6f (lightest grey allowed on #170303)
+#A6A6A6 (lightest grey allowed on #1b1b1b)
+#aaa
 #555
-#333
 
 --- 05 SHADOWS
 
-0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+0 2.4rem 4.8rem rgba(155, 155, 155, 0.075);
 
 --- 06 BORDER-RADIUS
 
@@ -79,8 +80,8 @@ body {
   font-family: "Rubik", sans-serif;
   line-height: 1;
   font-weight: 400;
-  color: #555;
-  background-color: rgb(27, 27, 27);
+  color: #ddd;
+  background-color: #131313;
 
   /* Only works if there is nothing absolutely positioned in relation to body */
   overflow-x: hidden;
@@ -133,14 +134,14 @@ body {
 .heading-secondary,
 .heading-tertiary {
   font-weight: 700;
-  color: #333;
+  color: #aaa;
   /* color: #4c0a0a; */
   /* color: #343a40; */
   letter-spacing: -0.5px;
 }
 
 .heading-primary {
-  font-size: 5.2rem;
+  font-size: 3.6rem;
   line-height: 1.05;
   margin-bottom: 3.2rem;
 }
@@ -161,7 +162,7 @@ body {
   display: block;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #cf1f1f;
+  color: #fe2424;
   text-transform: uppercase;
   margin-bottom: 1.6rem;
   letter-spacing: 0.75px;
@@ -173,7 +174,7 @@ body {
   display: inline-block;
 
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 600;
   padding: 1.6rem 3.2rem;
   border-radius: 9px;
@@ -190,34 +191,35 @@ body {
 
 .btn--full:link,
 .btn--full:visited {
-  background-color: #e62222;
+  background-color: #fe0c0c;
   color: #fff;
 }
 
 .btn--full:hover,
 .btn--full:active {
-  background-color: #cf1f1f;
+  background-color: #fe2424;
 }
 
 .btn--outline:link,
 .btn--outline:visited {
-  background-color: #fff;
+  background-color: #ddd;
   color: #555;
 }
 
 .btn--outline:hover,
 .btn--outline:active {
-  background-color: #fde9e9;
+  background-color: #170303;
+  color: #fff;
 
   /* border: 3px solid #fff; */
 
   /* Trick to add border inside */
-  box-shadow: inset 0 0 0 3px #fff;
+  box-shadow: inset 0 0 0 3px #ddd;
 }
 
 .btn--form {
   background-color: #4c0a0a;
-  color: #fde9e9;
+  color: #170303;
   align-self: end;
   padding: 1.2rem;
 }
@@ -230,7 +232,7 @@ body {
 .link:link,
 .link:visited {
   display: inline-block;
-  color: #e62222;
+  color: #fe0c0c;
   text-decoration: none;
   border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
@@ -239,7 +241,7 @@ body {
 
 .link:hover,
 .link:active {
-  color: #cf1f1f;
+  color: #fe2424;
   border-bottom: 1px solid transparent;
 }
 
@@ -261,12 +263,12 @@ body {
 .list-icon {
   width: 3rem;
   height: 3rem;
-  color: #e62222;
+  color: #fe0c0c;
 }
 
 *:focus {
   outline: none;
-  /* outline: 4px dotted #e62222; */
+  /* outline: 4px dotted #fe0c0c; */
   /* outline-offset: 8px; */
   box-shadow: 0 0 0 0.8rem rgba(255, 32, 32, 0.5);
 }
