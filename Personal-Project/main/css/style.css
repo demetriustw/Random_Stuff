@@ -77,6 +77,10 @@
 }
 
 /* STICKY NAVIGATION */
+.header {
+  transform: translateY(-100%);
+}
+
 .sticky .header {
   position: fixed;
   top: 0;
@@ -85,9 +89,14 @@
   height: 12rem;
   padding-top: 0;
   padding-bottom: 0;
-  background-color: #330202;
+  background-color: rgba(19, 19, 19, 0.97);
   box-shadow: 0 1.6rem 3.2rem rgba(155, 155, 155, 0.15);
   z-index: 999;
+  transition: all 0.5s ease-in;
+
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .sticky .section-hero {
