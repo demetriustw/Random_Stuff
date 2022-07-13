@@ -1,0 +1,37 @@
+Map Creation with Tiled Map Editor:
+  - Downloads and Setup
+    X Find assets
+    - Download Tiled
+    - Import into projects
+  - Tile Layering for Ocean and Landmasses
+  - Layeringand Placement of Trees
+  - Landscape Details
+  - Collisions and Map Boundaries
+  - Foreground Layers
+  ? Exporting Layers for Project Import
+
+Player and Map Development:
+  X Project setup
+  X Import and render map
+  X Player creation
+  X Move player through map on keydown
+  - PLayer-to-map-boundary collisions
+  - Foreground objects
+  - Player movement animation
+
+Battle Sequences:
+  - Battle activation
+  - Transition from map to battle sequence
+  - Draw battleBackground
+  - Add battle sprites
+
+
+
+
+chriscorses.com:
+  - Conversations with Other Characters
+  - Entering Other Buildings
+  - Traveling to Other Lands
+  - Item Collection and Inventory
+  - Healthbars and Healing
+  - Gym Battles
