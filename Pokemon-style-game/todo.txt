@@ -15,8 +15,8 @@ Player and Map Development:
   X Import and render map
   X Player creation
   X Move player through map on keydown
-  - PLayer-to-map-boundary collisions
-  - Foreground objects
+  X PLayer-to-map-boundary collisions
+  X Foreground objects
   - Player movement animation
 
 Battle Sequences:

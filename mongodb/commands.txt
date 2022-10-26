@@ -1,0 +1,406 @@
+(Chapter 2)------------------------------------------------------------------
+
+  mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+  my link/connection line: mongo "mongodb+srv://sandbox.lbg6c.mongodb.net/myFirstDatabase" --username m001-student
+
+
+  show dbs
+
+  use sample_training
+
+  show collections
+
+
+  db.zips.find({"state": "NY"})
+
+  db.zips.find({"state": "NY"}).count()
+
+  db.zips.find({"state": "NY", "city": "ALBANY"})
+
+  db.zips.find({"state": "NY", "city": "ALBANY"}).pretty()
+
+
+(Chapter 3)------------------------------------------------------------------
+
+  mongoimport --uri="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/sample_supplies" sales.json
+
+
+  mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+
+  use sample_training
+
+  db.inspections.findOne();
+
+
+  db.inspections.insert({
+        "_id" : ObjectId("56d61033a378eccde8a8354f"),
+        "id" : "10021-2015-ENFO",
+        "certificate_number" : 9278806,
+        "business_name" : "ATLIXCO DELI GROCERY INC.",
+        "date" : "Feb 20 2015",
+        "result" : "No Violation Issued",
+        "sector" : "Cigarette Retail Dealer - 127",
+        "address" : {
+                "city" : "RIDGEWOOD",
+                "zip" : 11385,
+                "street" : "MENAHAN ST",
+                "number" : 1712
+          }
+    })
+
+  db.inspections.insert({
+        "id" : "10021-2015-ENFO",
+        "certificate_number" : 9278806,
+        "business_name" : "ATLIXCO DELI GROCERY INC.",
+        "date" : "Feb 20 2015",
+        "result" : "No Violation Issued",
+        "sector" : "Cigarette Retail Dealer - 127",
+        "address" : {
+                "city" : "RIDGEWOOD",
+                "zip" : 11385,
+                "street" : "MENAHAN ST",
+                "number" : 1712
+          }
+    })
+
+  db.inspections.find({"id" : "10021-2015-ENFO", "certificate_number" : 9278806}).pretty()
+
+
+(Array's)---------------------------------
+
+  db.inspections.insert([ { "test": 1 }, { "test": 2 }, { "test": 3 } ])
+
+  db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },
+                        { "_id": 3, "test": 3 }])
+
+  db.inspections.find({ "_id": 1 })
+
+  db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },
+                        { "_id": 3, "test": 3 }],{ "ordered": false })
+
+  db.inspection.insert([{ "_id": 1, "test": 1 },{ "_id": 3, "test": 3 }])
+
+
+  show collections
+
+  use training
+
+  show dbs
+
+
+(upadateOne and updateMany)---------------------------------
+
+  mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+  use sample_training
+
+  db.zips.find({ "zip": "12534" }).pretty()
+
+  db.zips.find({ "city": "HUDSON" }).pretty()
+
+  db.zips.find({ "city": "HUDSON" }).count()
+
+  db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })
+
+  db.zips.updateOne({ "zip": "12534" }, { "$set": { "pop": 17630 } })
+
+  db.zips.updateOne({ "zip": "12534" }, { "$set": { "population": 17630 } })
+
+  db.grades.find({ "student_id": 151, "class_id": 339 }).pretty()
+
+  db.grades.find({ "student_id": 250, "class_id": 339 }).pretty()
+
+
+  db.grades.updateOne({ "student_id": 250, "class_id": 339 },
+                      { "$push": { "scores": { "type": "extra credit",
+                                              "score": 100 }
+                                  }
+                      })
+
+(Deleting)---------------------------------
+
+mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+use sample_training
+
+db.inspections.find({ "test": 1 }).pretty()
+
+db.inspections.find({ "test": 3 }).pretty()
+
+db.inspections.deleteMany({ "test": 1 })
+
+db.inspections.deleteOne({ "test": 3 })
+
+db.inspection.find().pretty()
+
+show collections
+
+db.inspection.drop()
+
+
+1.connect to your Atlas cluster,
+2.practice what you learned in earlier lectures,
+3.find answers to the quiz questions in this chapter.
+
+
+(Comparison Operators)---------------------------------
+
+mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+use sample_training
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": { "$ne": "Subscriber" } }).pretty()
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": { "$eq": "Customer" }}).pretty()
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": "Customer" }).pretty()                                
+
+How many documents in the sample_training.zips collection have fewer than 1000 people listed in the pop field? -- 8065
+
+What is the difference between the number of people born in 1998 and the number of people born after 1998 in the sample_training.trips collection?
+
+Using the sample_training.routes collection find out which of the following statements will return all routes that have at least one stop in them?
+
+--db.routes.find({ "stops": { "$ne": 0 }}).pretty()
+
+db.routes.find({ "stops": { "$gte": 0 }}).pretty()
+
+db.routes.find({ "stops": { "$lt": 0 }}).pretty()
+
+--db.routes.find({ "stops": { "$gt": 0 }}).pretty()
+
+
+(Query Operators: logic)---------------------------------
+
+mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+use sample_training
+
+db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" },
+                                    { "src_airport": "KZN" }
+                                  ] },
+                          { "$or" :[ { "airplane": "CR2" },
+                                     { "airplane": "A81" } ] }
+                         ]}).pretty()
+
+How many businesses in the sample_training.inspections dataset have the inspection result "Out of Business" and belong to the "Home Improvement Contractor - 100" sector?
+
+{"$and": [{"result": "Out of Buisness"}, {"sector": "Home Improvement Contractor - 100"}]}
+
+The quotes seem to change the result from working to not/vis versa---------------------------------
+
+{$and: [{result: "Out of Business"}, {sector: "Home Improvement Contractor - 100"}]}
+
+Which is the most succinct query to return all documents from the 
+sample_training.inspections collection 
+where the inspection date is either "Feb 20 2015", or "Feb 21 2015" 
+and the company is not part of the "Cigarette Retail Dealer - 127" sector?
+
+db.inspections.find(
+  {
+    "$and": 
+    [
+      {
+        "$or": 
+        [
+          {"date": "Feb 20 2015"}, 
+          {"date": "Feb 21 2015"}
+        ]
+      },
+      {
+        "$not": 
+        [
+          {"sector": "Cigarette Retail Dealer - 127"}
+        ]
+      }
+    ]
+  } <--- this
+)
+
+db.inspections.find({ "$and": [{"$or": [{"date": "Feb 20 2015"}, {"date": "Feb 21 2015"}]}, {"$not": [{"sector": "Cigarette Retail Dealer - 127"}]}]  missed --> "}"  )
+
+db.inspections.find({ "$and": [{"$or": [{"date": "Feb 20 2015"}, {"date": "Feb 21 2015"}]}, {"$not": [{"sector": "Cigarette Retail Dealer - 127"}]}] "" <-- } not here --> ""   )
+
+db.inspections.find(
+  { 
+    "$and": 
+    [
+      {
+        "$or": 
+        [
+          {
+            "date": "Feb 20 2015"
+          },
+          {
+            "date": "Feb 21 2015"
+          }
+        ]
+      }
+    ], "$not":
+    [
+      {"sector": "Cigarette Retail Dealer - 127"}
+    ]
+  }
+).count()
+
+db.inspections.find(
+  { "$and": 
+    [ 
+      { "$or" :
+        [ 
+          { 
+            "date": "Feb 20 2015" 
+          },
+          {
+            "date": "Feb 21 2015" 
+          }
+        ] 
+      }, 
+      { "$not" : <------ "$not" dosn't work and has to be "$nor"
+        [                ________ or this needs "$ne"
+          {             V
+            "sector": "Cigarette Retail Dealer - 127"
+          }
+        ] 
+      }
+    ]
+  }
+).count()
+
+db.inspections.find({ "$and": [{ "$or": [{ "date": "Feb 20 2015" }, { "date": "Feb 21 2015" }], { "$not": [{ "sector": "Cigarette Retail Dealer - 127" }]}}]}).count()
+
+db.inspections.find({ "$and": [{ "$or": [{ "date": "Feb 20 2015" }, { "date": "Feb 21 2015" }]}, { "$not": [{ "sector": "Cigarette Retail Dealer - 127" }]}]}).count()
+
+
+ANSWER ---------------------------------
+
+db.inspections.find(
+  { "$or": [ { "date": "Feb 20 2015" },
+             { "date": "Feb 21 2015" } ],
+    "sector": { "$ne": "Cigarette Retail Dealer - 127" }}).pretty()
+
+------------------------------------------------------------------
+
+db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": -10 } })
+
+
+How many zips in the sample_training.zips dataset are neither over-populated nor under-populated?
+
+In this case, we consider population of more than 1,000,000 to be over- populated and less than 5,000 to be under-populated.
+
+db.zips.find(
+  {
+    "$and":
+    [
+      {
+        "$or": 
+        [ 
+          {
+            
+              "population": 
+              {
+                "$lt": "1,000,000"
+              }
+          },
+          {
+            population:
+            { 
+              "$gt": 
+              "5000"
+            }
+          }
+        ]
+      }
+    ]
+  }
+)
+
+db.zips.find({"$or": [ {"pop": {  "$lt": "1,000,000"}}, {"pop": { "$gt": "5000"}}]})
+                                     ^-- what comes first matters --^
+                                
+db.zips.find({"$or": [{"pop": {"$gt": 5000}}, {"pop": {"$lt": 1000000}}]})
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+mongo "mongodb+srv://sandbox.lbg6c.mongodb.net/myFirstDatabase" --username m001-student
+
+use sample_airbnb
+
+db.listingsAndReviews.find({ "amenities": "Wifi" },
+                           { "price": 1, "address": 1, "_id": 0 }).pretty()
+
+db.listingsAndReviews.aggregate([
+                                  { "$match": { "amenities": "Wifi" } },
+                                  { "$project": { "price": 1,
+                                                  "address": 1,
+                                                  "_id": 0 }}]).pretty()
+
+db.listingsAndReviews.findOne({ },{ "address": 1, "_id": 0 })
+
+db.listingsAndReviews.aggregate([ { "$project": { "address": 1, "_id": 0 }},
+                                  { "$group": { "_id": "$address.country" }}])
+
+db.listingsAndReviews.aggregate([
+                                  { "$project": { "address": 1, "_id": 0 }},
+                                  { "$group": { "_id": "$address.country",
+                                                "count": { "$sum": 1 } } }
+                                ])
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+mongo "mongodb+srv://sandbox.lbg6c.mongodb.net/myFirstDatabase" --username m001-student
+
+use sample_training
+
+db.zips.find().sort({ "pop": 1 }).limit(1)
+
+db.zips.find({ "pop": 0 }).count()
+
+db.zips.find().sort({ "pop": -1 }).limit(1)
+
+db.zips.find().sort({ "pop": -1 }).limit(10)
+
+db.zips.find().sort({ "pop": 1, "city": -1 })
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+mongo "mongodb+srv://sandbox.lbg6c.mongodb.net/myFirstDatabase" --username m001-student
+
+use sample_training
+
+db.trips.find({ "birth year": 1989 })
+
+db.trips.find({ "start station id": 476 }).sort( { "birth year": 1 } )
+
+db.trips.createIndex({ "birth year": 1 })
+
+db.trips.createIndex({ "start station id": 1, "birth year": 1 })
+
+Jameela often queries the sample_training.routes collection by the src_airport field like this:
+
+db.routes.find({ "src_airport": "MUC" }).pretty()
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+db.iot.updateOne({ "sensor": r.sensor, "date": r.date,
+                   "valcount": { "$lt": 48 } },
+                         { "$push": { "readings": { "v": r.value, "t": r.time } },
+                        "$inc": { "valcount": 1, "total": r.value } },
+                 { "upsert": true })
+
+db.listingsAndReviews.aggregate([ { "$group": { "_id": "$room_type" } }])
+
+db.trips.find({ "birth year": { "$ne":"" } },{ "birth year": 1 }).sort({ "birth year": -1 }).limit(1)
